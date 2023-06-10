@@ -362,4 +362,13 @@ span.img-info{
     .container-info > .box{
         width: 98%;
     }
+
+    .container-graphic2-3{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .graphic1, .graphic2, .graphic3{
+        width: 98%;
+    }
 }
