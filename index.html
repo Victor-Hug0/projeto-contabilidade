@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    
+    <title>Gestão Empresarial</title>
+    
+</head>
+<body>
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <img class="logo-img" src="img/logo-small.png" alt="Logo Usuário">
+            <span>Usuário</span>
+        </header>
+        <nav>
+            <button>
+                <span>
+                    <i class="material-symbols-outlined">home</i>
+                    <span>Home</span>
+                </span>
+            </button>
+
+            <button>
+                <span>
+                    <i class="material-symbols-outlined">sell</i>
+                    <span>Cadastrar produtos</span>
+                </span>
+            </button>
+
+            <button>
+                <span>
+                    <i class="material-symbols-outlined">shopping_bag</i>
+                    <span>Realizar venda</span>
+                </span>
+            </button>
+
+            <button>
+                <span>
+                    <i class="material-symbols-outlined">person</i>
+                    <span>Lista de funcionários</span>
+                </span>
+            </button>
+        </nav>
+    </aside>
+
+    <!--Menu Mobile -->
+
+    <button class="button-mobile" onclick="toggleMenu()">
+        <i class="material-symbols-outlined"> menu </i>
+        <span>Menu</span>
+    </button>
+
+    <nav class="menu-mobile" id="menu-mobile">
+        <button onclick="toggleMenu()">
+            <span>
+                <i class="material-symbols-outlined">cancel</i>
+            </span>
+        </button>
+
+        <button>
+            <span>
+                <i class="material-symbols-outlined">home</i>
+                <span class="mobile-text">Home</span>
+            </span>
+        </button>
+
+        <button>
+            <span>
+                <i class="material-symbols-outlined">sell</i>
+                <span class="mobile-text">Cadastrar produtos</span>
+            </span>
+        </button>
+
+        <button>
+            <span>
+                <i class="material-symbols-outlined">shopping_bag</i>
+                <span class="mobile-text">Realizar venda</span>
+            </span>
+        </button>
+
+        <button>
+            <span>
+                <i class="material-symbols-outlined">person</i>
+                <span class="mobile-text">Lista de funcionários</span>
+            </span>
+        </button>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <div class="container-info">
+                <div class="box">
+                    <span class="material-symbols-outlined img-info products">deployed_code</span>
+                    <div class="number">
+                        <p class="title-info">Produtos no Estoque</p>
+                        <p class="number-info">0</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <span class="material-symbols-outlined img-info money">payments</span>
+                    <div class="number">
+                        <p class="title-info">Lucro</p>
+                        <p class="number-info">R$ 032</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <span class="material-symbols-outlined img-info cart">shopping_cart</span>
+                    <div class="number">
+                        <p class="title-info">Quantidade de Vendas</p>
+                        <p class="number-info">0</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <span class="material-symbols-outlined img-info badge">badge</span>
+                    <div class="number">
+                        <p class="title-info">Funcionários</p>
+                        <p class="number-info">0</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="graphic1">
+                <h2>Gráfico Receita x Despesa</h2>
+                <p>Ano : 2022</p>
+                <canvas id="incomeExpenses" style="width: 1200px; height: 380px;"></canvas>
+            </div>
+            <div class="container-graphic2-3">
+                <div class="graphic2">
+                    <h2>Relatório de Pedidos</h2>
+                    <p>Últimos 30 dias</p>
+                    <canvas id="pizzagraphic" style="width: 200px; height: 120px;"></canvas>
+                    <hr>
+                    <i class="material-symbols-outlined" style="color: rgb(74, 204, 205); font-size: 15px;">radio_button_checked</i> Enviados
+                    <i class="material-symbols-outlined" style="color: rgb(252, 196, 104); font-size: 15px;">radio_button_checked</i> Em produção
+                    <i class="material-symbols-outlined" style="color: rgb(239, 129, 87); font-size: 15px;">radio_button_checked</i> Cancelados
+                    <i class="material-symbols-outlined" style="color: gray; font-size: 15px">radio_button_checked</i> Aguardando
+                </div>
+                <div class="graphic3">
+                    <h2>Produtos mais vendidos</h2>
+                    <p>Ano : 2022</p>
+                    <canvas id="graphicLine" style="width: 300px; height: 91px;"></canvas>
+                    <hr>
+                    <i class="material-symbols-outlined" style="color: rgb(81, 202, 207); font-size: 15px;">radio_button_checked</i> IPhone 11 128gb
+                    <i class="material-symbols-outlined" style="color: rgb(251, 198, 88); font-size: 15px;">radio_button_checked</i> IPhone XR 64gb
+                    <i class="material-symbols-outlined" style="color: rgb(107, 208, 152); font-size: 15px;">radio_button_checked</i> IPhone 12 pro max 128gb
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/js/app.js"></script>
+</body>
+</html>
