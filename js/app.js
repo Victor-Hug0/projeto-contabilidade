@@ -8,6 +8,36 @@ function toggleMenu(){
     }
 }
 
+function changePageOnMobile(){
+  const menuMobile = document.getElementById("menu-mobile");
+  const homeButton = document.getElementById('homeBtn');
+  const sellButton = document.getElementById('sellBtn');
+  const shoppingBagButton = document.getElementById('cadBtn');
+  const employeesButton = document.getElementById('empBtn');
+
+  homeButton.addEventListener('click', function() {
+    window.location.href = "index.html";
+    menuMobile.className = "menu-mobile";
+  });
+
+  sellButton.addEventListener('click', function() {
+    window.location.href = "index.html";
+    menuMobile.className = "menu-mobile";
+  });
+
+  shoppingBagButton.addEventListener('click', function() {
+    window.location.href = "index.html";
+    menuMobile.className = "menu-mobile";
+  });
+
+  employeesButton.addEventListener('click', function() {
+    window.location.href = "funcionarios.html";
+    menuMobile.className = "menu-mobile";
+  });
+}
+
+changePageOnMobile();
+
 var ctx = document.getElementById('incomeExpenses').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',

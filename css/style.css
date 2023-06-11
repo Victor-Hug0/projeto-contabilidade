@@ -52,7 +52,7 @@ header > span{
     transform: scale(1.2);
 }
 
-.sidebar button{
+.sidebar a{
     height: 60px;
     background: transparent;
     border: 0;
@@ -63,7 +63,7 @@ header > span{
     padding: 0;
 }
 
-.sidebar button > span{
+.sidebar a > span{
     display: inline-flex;
     align-items: center;
     gap: 12px;
@@ -74,17 +74,17 @@ header > span{
     transition: all 0.2s;
 }
 
-.sidebar button:hover > span{
+.sidebar a:hover > span{
     background: rgba(0, 0, 0, 0.08);
 }
 
-.sidebar button i{
+.sidebar a i{
     font-size: 28px;
     position: relative;
     transition: 0.2s;
 }
 
-.sidebar button span{
+.sidebar a span{
     font-size: 16px;
 }
 
@@ -165,7 +165,17 @@ span.img-info{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.graphic1 > h2{
+.table-func{
+    padding-top: 5px;
+    width: 1380px;
+    height: 800px;
+    margin: 20px auto 30px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.graphic1 > h2, .table-func > h2{
     font-family: 'Roboto Slab', serif;
     margin: 10px 0 0 20px;
     color: #6a696b;
@@ -217,6 +227,13 @@ span.img-info{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+.table-responsive{
+    margin: 20px;
+}
+
+.text-primary th{
+    color: rgb(81, 203, 206);
+}
 
 
 @media (width < 1510px) {
@@ -228,11 +245,11 @@ span.img-info{
         display: none;
     }
 
-    .sidebar button > span{
+    .sidebar a > span{
         width: 50px;
     }
 
-    .sidebar button > span > span{
+    .sidebar a > span > span{
         opacity: 0;
         visibility: hidden;
     }
@@ -259,6 +276,13 @@ span.img-info{
         height: 280px;
     }
 
+    .table-func{
+        align-items: center;
+        justify-content: center;
+        width: 644px;
+        height: 500px;
+    }
+
     .container-graphic2-3{
         width: 644px;
         margin: auto;
@@ -280,10 +304,6 @@ span.img-info{
     #graphicLine{
         width: 630px;
     }
-
-    
-
-
 }
 
 .button-mobile{
@@ -369,8 +389,7 @@ span.img-info{
         height: 900px;
     }
 
-    .graphic1, .graphic2, .graphic3{
+    .graphic1, .graphic2, .graphic3, .table-func{
         width: 98%;
     }
-
 }
