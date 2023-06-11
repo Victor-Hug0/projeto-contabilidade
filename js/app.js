@@ -26,7 +26,7 @@ function changePageOnMobile(){
   });
 
   shoppingBagButton.addEventListener('click', function() {
-    window.location.href = "index.html";
+    window.location.href = "cadProdutos.html";
     menuMobile.className = "menu-mobile";
   });
 

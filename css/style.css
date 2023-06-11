@@ -186,6 +186,36 @@ span.img-info{
     color: #6a696b;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+tr{
+    border-bottom: 1px solid #6a696b47;
+}
+
+.table{
+    width: 95%;
+    height: 400px;
+}
+
+.text-center, .text-left, .text-right{
+    font-family: "Roboto", sans-serif;
+}
+
+
+.text-right{
+    text-align: end;
+}
+
+.text-left{
+    text-align: start;
+}
+
+.text-center{
+    text-align: center;
+}
+
 .container-graphic2-3 {
     margin-left: 90px;
     width: 1450px;
