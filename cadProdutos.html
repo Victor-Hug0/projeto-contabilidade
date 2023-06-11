@@ -93,21 +93,76 @@
     </nav>
 
     <main class="main">
-        <div class="container">
-            <div class="table-func">
-                <h2>Lista de Funcionários</h2>
-                <form action="">
+        <div class="container-cad">
+            <div class="telaCad">
+                <h2>Cadastro de Produtos</h2>
+                <form class="form-cadProduto" action="">
                     <label for="nomeP">Nome do Produto</label>
-                    <input type="text" class="form-control" id="nomeP" placeholder="Ex: IPhone 14 Pro Max" style="width: 400px;">
+                    <input type="text" class="form-control" id="nomeP" placeholder="Ex: IPhone 14 Pro Max" style="width: 400px;" required>
                     <label for="tipoP">Tipo do Produto</label>
-                    <input type="text" class="form-control" id="tipoP" placeholder="Ex: Celular" style="width: 400px;">
+                    <input type="text" class="form-control" id="tipoP" placeholder="Ex: Celular" style="width: 400px;" required>
+                    <label for="tipoP">Valor</label>
+                    <input type="number" class="form-control" id="valorP" placeholder="Ex: 10000" style="width: 400px;" required>
                     <label for="descricaoP">Descrição do Produto</label>
-                    <input type="text" class="form-control" id="descricaoP" placeholder="Ex: Armazenamento = 128gb" style="width: 400px;">
-                    <button>Cadastrar</button>
+                    <textarea name="descricao" id="descricaoP" cols="30" rows="5" placeholder="Ex : Armazenamento = 128gb" required></textarea>
+                    <button class="btn" id="btnCadastroProduto">Cadastrar</button>
                 </form>
+            </div>
+            <div class="telaCad">
+                <h2>Lista de Produtos Cadastrados</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th class="text-left">
+                          Nome
+                        </th>
+                        <th>
+                          Estado
+                        </th>
+                        <th>
+                          Cidade
+                        </th>
+                        <th class="text-right">
+                          Salário
+                        </th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="text-left">
+                            Dakota Rice
+                          </td>
+                          <td class="text-center">
+                            Sergipe
+                          </td>
+                          <td class="text-center">
+                            Aracaju
+                          </td>
+                          <td class="text-right">
+                            R$3,200
+                          </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                              Dakota Rice
+                            </td>
+                            <td class="text-center">
+                              Sergipe
+                            </td>
+                            <td class="text-center">
+                              Aracaju
+                            </td>
+                            <td class="text-right">
+                              R$3,200
+                            </td>
+                          </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
             </div>
         </div>
     </main>
     <script src="js/app.js"></script>
+    <script src="js/cadastroProduto.js"></script>
 </body>
 </html>
