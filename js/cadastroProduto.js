@@ -1,8 +1,9 @@
 class Produto{
-    constructor(nomeProduto, tipoProduto, valorProduto, descricaoP){
+    constructor(nomeProduto, tipoProduto, valorProduto, quantidadadeProduto, descricaoP){
         this.nomeProduto = nomeProduto,
         this.tipoProduto = tipoProduto,
         this.valorProduto = valorProduto,
+        this.quantidadadeProduto = quantidadadeProduto,
         this.descricaoP = descricaoP
     }
 
@@ -48,6 +49,16 @@ class Bd{
         }
         return produtosCadastrados;
     }
+
+    recuperaQuantidadedeProdutos(){
+        let quantidadadeProdutosTotal = 0;
+        let id = localStorage.getItem("id");
+        for(let i = 1; i <= id; i++){
+            let produto = JSON.parse(localStorage.getItem(i))
+            quantidadadeProdutosTotal += Number(produto.quantidadadeProduto);
+        }
+        return quantidadadeProdutosTotal;
+    }
 }
 
 let bd = new Bd();
@@ -66,9 +77,12 @@ function cadastoProduto(){
         e.preventDefault();
         let nomeProduto = document.getElementById("nomeP").value;
         let tipoProduto = document.getElementById("tipoP").value;
+        let quantidadadeProduto = document.getElementById("qntdP").value;
         let valorProduto = document.getElementById("valorP").value;
         let descriçãoP = document.getElementById("descricaoP").value;
-        let produto = new Produto(nomeProduto, tipoProduto, valorProduto, descriçãoP);
+        let valorTotalProduto = 0;
+        
+        let produto = new Produto(nomeProduto, tipoProduto, valorProduto,quantidadadeProduto, descriçãoP);
         if (produto.validarDados()){
             bd.addProdutoLocalStorage(produto);
             modalSucess.style.display = "block";
@@ -81,7 +95,10 @@ function cadastoProduto(){
                     modalSucess.style.display = "none";
                 } 
             }
+
+            valorTotalProduto += Number(valorProduto) * Number(quantidadadeProduto);
             form.reset();
+            mostrarInfosProdutos();
         } else {
             modalError.style.display = "block";
             spanE.onclick = function() {
@@ -96,10 +113,6 @@ function cadastoProduto(){
         }
 
         carregaListaProdutos();
-
-        
-
-        
     })
 }
 
@@ -111,17 +124,26 @@ function carregaListaProdutos(){
         let linha = listaProdutos.insertRow();
         let celulaEsquerda = linha.insertCell(0);
         let celulaCentro = linha.insertCell(1);
-        let celulaDireita = linha.insertCell(2);
+        let celulaCentro2 = linha.insertCell(2);
+        let celulaDireita = linha.insertCell(3);
         celulaEsquerda.innerHTML = p.nomeProduto;
         celulaCentro.innerHTML = p.tipoProduto;
+        celulaCentro2.innerHTML = p.quantidadadeProduto;
         celulaDireita.innerHTML = `R$ ${p.valorProduto}`;
         celulaEsquerda.classList.add("alinhamento-esquerda");
         celulaCentro.classList.add("alinhamento-centro");
+        celulaCentro2.classList.add("alinhamento-centro")
         celulaDireita.classList.add("alinhamento-direita");
     })
 }
 
+function mostrarInfosProdutos(){
+    let pC = document.getElementById("produtosCadastrados");
+    let qntdTotal = bd.recuperaQuantidadedeProdutos();
+    pC.innerHTML = `${qntdTotal}`;
+}
+
+
 cadastoProduto();
 
-window.addEventListener("load", carregaListaProdutos);
 

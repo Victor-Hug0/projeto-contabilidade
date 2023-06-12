@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body onload="carregaListaProdutos()">
   <aside class="sidebar">
     <header class="sidebar-header">
       <img class="logo-img" src="img/logo-small.png" alt="Logo Usuário">
@@ -108,6 +108,8 @@
           <input type="text" class="form-control" id="tipoP" placeholder="Ex: Celular" style="width: 400px;" required>
           <label for="tipoP">Valor</label>
           <input type="number" class="form-control" id="valorP" placeholder="Ex: 10000" style="width: 400px;" required>
+          <label for="qntdP">Quantidade</label>
+          <input type="number" class="form-control" id="qntdP" placeholder="Ex: 20" style="width: 400px;" required>
           <label for="descricaoP">Descrição do Produto</label>
           <textarea name="descricao" id="descricaoP" cols="30" rows="5" placeholder="Ex : Armazenamento = 128gb"
             required></textarea>
@@ -125,8 +127,11 @@
               <th>
                 Tipo
               </th>
+              <th>
+                Quantidade
+              </th>
               <th class="text-right">
-                Valor
+                Valor Unitário
               </th>
             </thead>
             <tbody id="listaProdutos">
