@@ -59,11 +59,26 @@ class Bd {
         }
         return quantidadadeProdutosTotal;
     }
+
+    atualizarQuantidadeProdutos() {
+        let quantidadeProdutosTotal = this.recuperaQuantidadedeProdutos();
+        let qntdProdutosElement = document.getElementById("produtosCadastrados");
+      
+        if (qntdProdutosElement) {
+          qntdProdutosElement.textContent = quantidadeProdutosTotal;
+        }
+      }
+    
+    removerProdutoLocalStorage(id) {
+        localStorage.removeItem(id);
+        this.atualizarQuantidadeProdutos(); // Atualiza a quantidade de produtos após a remoção
+    }
 }
 
 let bd = new Bd();
 let produtodCadastrados = [];
 let produtosVendidos = [];
+
 
 function cadastoProduto() {
     let form = document.querySelector(".form-cadProduto");
@@ -110,8 +125,6 @@ function cadastoProduto() {
                 }
             };
         }
-
-
     });
 }
 
@@ -134,50 +147,62 @@ function carregaListaProdutos() {
         celulaCentro2.classList.add("alinhamento-centro");
         celulaDireita.classList.add("alinhamento-direita");
     });
+    mostrarInfosProdutos(); // Atualiza as informações dos produtos
 }
 
 function mostrarInfosProdutos() {
-    let pC = document.getElementById("produtosCadastrados");
-    let qntdTotal = bd.recuperaQuantidadedeProdutos();
-    pC.innerHTML = `${qntdTotal}`;
+    bd.atualizarQuantidadeProdutos();
+  
+    let qntdProdutosElement = document.getElementById("produtosCadastrados");
+    let quantidadeProdutosTotal = bd.recuperaQuantidadedeProdutos();
+    qntdProdutosElement.textContent = quantidadeProdutosTotal;
 }
+  
+
+  
 
 function getIdProduto(nomeProduto) {
     let id = null;
     for (let i = 1; i <= localStorage.length; i++) {
-      let produto = JSON.parse(localStorage.getItem(i));
-      if (produto && produto.nomeProduto === nomeProduto) {
-        id = i;
-        break;
-      }
+        let produto = JSON.parse(localStorage.getItem(i));
+        if (produto && produto.nomeProduto === nomeProduto) {
+            id = i;
+            break;
+        }
     }
     return id;
-  }
+}
 
 function vendaProduto() {
     let nomePVenda = document.getElementById("nomePVenda");
 
     const idProduto = getIdProduto(nomePVenda.value);
-    if (idProduto !== null){
+    if (idProduto !== null) {
         produtosVendidos.push(localStorage.getItem(idProduto));
         localStorage.removeItem(idProduto);
         alert("Venda realizada com sucesso!");
+
+        // Mostrar as informações dos produtos somente após a venda ser concluída
+        nomePVenda.value = ""; // Limpar o campo de nome do produto vendido
+        carregaListaProdutos(); // Atualizar a lista de produtos
+        mostrarInfosProdutos(); // Atualizar as informações dos produtos
     }
-    carregaListaProdutos();
 }
 
 function calcularValorTotalVendas() {
     let valorTotalVendas = 0;
-    produtosVendidos.forEach(function(produto) {
-      valorTotalVendas += Number(produto.valorTotalProduto);
+    produtosVendidos.forEach(function (produto) {
+        valorTotalVendas += Number(produto.valorTotalProduto);
     });
     return valorTotalVendas;
 }
 
-function mostraInfoLucros(){
+function mostraInfoLucros() {
     let lucroInfo = document.getElementById("lucroInfo");
     let valorLucro = calcularValorTotalVendas().toFixed(2);
     lucroInfo.innerHTML = `R$ ${valorLucro}`;
 }
 
 cadastoProduto();
+carregaListaProdutos();
+mostrarInfosProdutos();

@@ -177,5 +177,3 @@ var myChart = new Chart(ctx, {
       data: speedData,
       options: chartOptions
     });
-
-
