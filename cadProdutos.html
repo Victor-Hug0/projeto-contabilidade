@@ -105,8 +105,10 @@
           <input type="text" class="form-control" id="nomeP" placeholder="Ex: IPhone 14 Pro Max"required>
           <label for="tipoP">Tipo do Produto</label>
           <input type="text" class="form-control" id="tipoP" placeholder="Ex: Celular" required>
-          <label for="tipoP">Valor</label>
+          <label for="tipoP">Valor de Compra</label>
           <input type="number" class="form-control" id="valorP" placeholder="Ex: 10000" required>
+          <label for="tipoP">Valor de Revenda</label>
+          <input type="number" class="form-control" id="valorRevendaP" placeholder="Ex: 10000" required>
           <label for="qntdP">Quantidade</label>
           <input type="number" class="form-control" id="qntdP" placeholder="Ex: 20" required>
           <label for="descricaoP">Descrição do Produto</label>
@@ -155,6 +157,13 @@
       <div class="modal-content">
         <span class="closeS">&times;</span>
         <p>Produto cadastrado com sucesso!</p>
+      </div>
+    </div>
+    <div id="modalError2" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="closeE2">&times;</span>
+        <p>O valor de revenda deve ser maior que o valor de compra do produto!</p>
       </div>
     </div>
   </main>

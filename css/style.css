@@ -348,7 +348,7 @@ tr{
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
 
-  #modalError p{
+  #modalError p, #modalError2 p{
     color: red;
     font-size: 20px;
   }
@@ -368,15 +368,15 @@ tr{
   }
   
   /* The Close Button */
-  .closeE, .closeS {
+  .closeE, .closeE2, .closeS {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
   }
   
-  .closeE:hover, .closeS:hover,
-  .closeE:focus, .closeS:focus  {
+  .closeE:hover, .closeS:hover, .closeE2:hover,
+  .closeE:focus, .closeS:focus, .closeE2:focus  {
     color: #000;
     text-decoration: none;
     cursor: pointer;

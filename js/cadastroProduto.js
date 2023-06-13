@@ -115,50 +115,75 @@ function cadastoProduto() {
     let form = document.querySelector(".form-cadProduto");
     let btnCadastroProduto = document.getElementById("btnCadastroProduto");
     var modalError = document.getElementById("modalError");
+    var modalError2 = document.getElementById("modalError2")
     var modalSucess = document.getElementById("modalSucess");
     var spanE = document.getElementsByClassName("closeE")[0];
+    var spanE2 = document.getElementsByClassName("closeE2")[0];
     var spanS = document.getElementsByClassName("closeS")[0];
-
+  
     btnCadastroProduto.addEventListener("click", function (e) {
-        e.preventDefault();
-        let nomeProduto = document.getElementById("nomeP").value;
-        let tipoProduto = document.getElementById("tipoP").value;
-        let quantidadadeProduto = document.getElementById("qntdP").value;
-        let valorProdutoUnidade = document.getElementById("valorP").value;
-        let descricaoP = document.getElementById("descricaoP").value;
-        let valorTotalProduto = Number(valorProdutoUnidade) * Number(quantidadadeProduto);
-
-        let produto = new Produto(nomeProduto, tipoProduto, valorProdutoUnidade, valorTotalProduto, quantidadadeProduto, descricaoP);
-        if (produto.validarDados()) {
-            bd.addProdutoLocalStorage(produto);
-            modalSucess.style.display = "block";
-            produtodCadastrados.push(produto);
-            spanS.onclick = function () {
-                modalSucess.style.display = "none";
-            };
-
-            window.onclick = function (event) {
-                if (event.target == modalSucess) {
-                    modalSucess.style.display = "none";
-                }
-            };
-
-            form.reset();
-            carregaListaProdutos();
-        } else {
-            modalError.style.display = "block";
-            spanE.onclick = function () {
-                modalError.style.display = "none";
-            };
-
-            window.onclick = function (event) {
-                if (event.target == modalError) {
-                    modalError.style.display = "none";
-                }
-            };
-        }
+      e.preventDefault();
+      let nomeProduto = document.getElementById("nomeP").value;
+      let tipoProduto = document.getElementById("tipoP").value;
+      let quantidadeProduto = document.getElementById("qntdP").value;
+      let valorProdutoUnidade = document.getElementById("valorP").value;
+      let valorRevenda = document.getElementById("valorRevendaP").value;
+      let descricaoP = document.getElementById("descricaoP").value;
+      let valorTotalProduto = Number(valorProdutoUnidade) * Number(quantidadeProduto);
+  
+      // Verifica se o valor do produto é maior que o valor de revenda
+      if (Number(valorProdutoUnidade) > Number(valorRevenda)) {
+        modalError2.style.display = "block";
+        spanE2.onclick = function () {
+          modalError2.style.display = "none";
+        };
+  
+        window.onclick = function (event) {
+          if (event.target == modalError) {
+            modalError2.style.display = "none";
+          }
+        };
+        return; // Sai da função sem cadastrar o produto
+      }
+  
+      let produto = new Produto(
+        nomeProduto,
+        tipoProduto,
+        valorProdutoUnidade,
+        valorTotalProduto,
+        quantidadeProduto,
+        descricaoP
+      );
+      if (produto.validarDados()) {
+        bd.addProdutoLocalStorage(produto);
+        modalSucess.style.display = "block";
+        produtodCadastrados.push(produto);
+        spanS.onclick = function () {
+          modalSucess.style.display = "none";
+        };
+  
+        window.onclick = function (event) {
+          if (event.target == modalSucess) {
+            modalSucess.style.display = "none";
+          }
+        };
+  
+        form.reset();
+        carregaListaProdutos();
+      } else {
+        modalError.style.display = "block";
+        spanE.onclick = function () {
+          modalError.style.display = "none";
+        };
+  
+        window.onclick = function (event) {
+          if (event.target == modalError) {
+            modalError.style.display = "none";
+          }
+        };
+      }
     });
-}
+  }
 
 function carregaListaProdutos() {
     produtodCadastrados = bd.recuperarTodosRegistros();
