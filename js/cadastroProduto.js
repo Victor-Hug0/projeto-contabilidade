@@ -60,6 +60,42 @@ class Bd {
         return quantidadadeProdutosTotal;
     }
 
+    recuperaValorTotalProdutos(){
+        let valorProdutosTotal = 0;
+        let id = localStorage.getItem("id");
+        for(let i = 1; i <= id; i++){
+            let produto = JSON.parse(localStorage.getItem(i));
+            valorProdutosTotal += Number(produto.valorTotalProduto);
+        }
+        return valorProdutosTotal;
+    }
+
+    recuperaQuantidadedeCadastros(){
+        let qntd = 0;
+        let id = localStorage.getItem("id");
+        for(let i = 1; i <= id; i++){
+            qntd++;
+        }
+        return qntd;
+    }
+
+    atualizaQuantidadeCadastros(){
+        let qntd = this.recuperaQuantidadedeCadastros();
+        let y = document.getElementById("qntdCadastrosProdutos");
+        if(y){
+            y.innerHTML = qntd;
+        }
+    }
+
+
+    atualizarValorTotalprodutos(){
+        let valorTotal = this.recuperaValorTotalProdutos();
+        let v = document.getElementById("valorTotal");
+        if(v){
+            v.innerHTML = `R$ ${valorTotal.toFixed(2)}`
+        }
+    }
+
     atualizarQuantidadeProdutos() {
         let quantidadeProdutosTotal = this.recuperaQuantidadedeProdutos();
         let qntdProdutosElement = document.getElementById("produtosCadastrados");
@@ -68,11 +104,6 @@ class Bd {
           qntdProdutosElement.textContent = quantidadeProdutosTotal;
         }
       }
-    
-    removerProdutoLocalStorage(id) {
-        localStorage.removeItem(id);
-        this.atualizarQuantidadeProdutos(); // Atualiza a quantidade de produtos após a remoção
-    }
 }
 
 let bd = new Bd();
@@ -101,6 +132,7 @@ function cadastoProduto() {
         if (produto.validarDados()) {
             bd.addProdutoLocalStorage(produto);
             modalSucess.style.display = "block";
+            produtodCadastrados.push(produto);
             spanS.onclick = function () {
                 modalSucess.style.display = "none";
             };
@@ -156,51 +188,26 @@ function mostrarInfosProdutos() {
     let qntdProdutosElement = document.getElementById("produtosCadastrados");
     let quantidadeProdutosTotal = bd.recuperaQuantidadedeProdutos();
     qntdProdutosElement.textContent = quantidadeProdutosTotal;
-}
-  
-
-  
-
-function getIdProduto(nomeProduto) {
-    let id = null;
-    for (let i = 1; i <= localStorage.length; i++) {
-        let produto = JSON.parse(localStorage.getItem(i));
-        if (produto && produto.nomeProduto === nomeProduto) {
-            id = i;
-            break;
-        }
-    }
-    return id;
+    mostraValorTotalProdutos();
+    mostraQuantidadeProdutos()
 }
 
-function vendaProduto() {
-    let nomePVenda = document.getElementById("nomePVenda");
-
-    const idProduto = getIdProduto(nomePVenda.value);
-    if (idProduto !== null) {
-        produtosVendidos.push(localStorage.getItem(idProduto));
-        localStorage.removeItem(idProduto);
-        alert("Venda realizada com sucesso!");
-
-        // Mostrar as informações dos produtos somente após a venda ser concluída
-        nomePVenda.value = ""; // Limpar o campo de nome do produto vendido
-        carregaListaProdutos(); // Atualizar a lista de produtos
-        mostrarInfosProdutos(); // Atualizar as informações dos produtos
+function mostraValorTotalProdutos() {
+    bd.atualizarValorTotalprodutos(); // Correção na chamada do método
+    let valorTotal = bd.recuperaValorTotalProdutos();
+    let v = document.getElementById("valorTotal");
+    if (v) {
+        v.innerHTML = `R$ ${valorTotal.toFixed(2)}`;
     }
 }
 
-function calcularValorTotalVendas() {
-    let valorTotalVendas = 0;
-    produtosVendidos.forEach(function (produto) {
-        valorTotalVendas += Number(produto.valorTotalProduto);
-    });
-    return valorTotalVendas;
-}
-
-function mostraInfoLucros() {
-    let lucroInfo = document.getElementById("lucroInfo");
-    let valorLucro = calcularValorTotalVendas().toFixed(2);
-    lucroInfo.innerHTML = `R$ ${valorLucro}`;
+function mostraQuantidadeProdutos(){
+    bd.atualizaQuantidadeCadastros();
+    let qntdCadastrosProdutos = bd.recuperaQuantidadedeCadastros();
+    let y = document.getElementById("qntdCadastrosProdutos");
+    if(y){
+        y.innerHTML = qntdCadastrosProdutos;
+    }
 }
 
 cadastoProduto();

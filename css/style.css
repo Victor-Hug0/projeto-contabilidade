@@ -311,13 +311,15 @@ tr{
 
 .form-control{
     height: 30px;
-    width: 200px;
+    width: 350px;
 }
 
 .form-cadProduto textarea{
     resize: none;
-    width: 400px;
+    width: 350px;
 }
+
+
 
 .btn{
     border: none;
@@ -543,6 +545,11 @@ tr{
 
     .graphic1, .graphic2, .graphic3, .table-func, .telaCad{
         width: 98%;
+    }
+
+    .form-cadProduto input, .form-Vendas input,
+    .form-cadProduto textarea, .form-Vendas textarea{
+        width: 70vw;
     }
 
 }
