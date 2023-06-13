@@ -16,7 +16,7 @@
 
 </head>
 
-<body onload="carregaListaProdutos()">
+<body>
   <aside class="sidebar">
     <header class="sidebar-header">
       <img class="logo-img" src="img/logo-small.png" alt="Logo Usuário">
@@ -99,47 +99,15 @@
   <main class="main">
     <div class="container-cad">
       <div class="telaCad">
-        <h2>Cadastro de Produtos</h2>
-        <form class="form-cadProduto" action="">
-          <label for="nomeP">Nome do Produto</label>
-          <input type="text" class="form-control" id="nomeP" placeholder="Ex: IPhone 14 Pro Max" style="width: 400px;"
+        <h2>Venda de Produtos</h2>
+        <form class="form-Vendas" action="">
+          <label for="nomeP">Informe o nome do produto</label>
+          <input type="text" class="form-control" id="nomePVenda" placeholder="Ex: IPhone 14 Pro Max" style="width: 400px;"
             required>
-          <label for="tipoP">Tipo do Produto</label>
-          <input type="text" class="form-control" id="tipoP" placeholder="Ex: Celular" style="width: 400px;" required>
-          <label for="tipoP">Valor</label>
-          <input type="number" class="form-control" id="valorP" placeholder="Ex: 10000" style="width: 400px;" required>
           <label for="qntdP">Quantidade</label>
-          <input type="number" class="form-control" id="qntdP" placeholder="Ex: 20" style="width: 400px;" required>
-          <label for="descricaoP">Descrição do Produto</label>
-          <textarea name="descricao" id="descricaoP" cols="30" rows="5" placeholder="Ex : Armazenamento = 128gb"
-            required></textarea>
-          <button class="btn" id="btnCadastroProduto">Cadastrar</button>
+          <input type="number" class="form-control" id="qntdPVenda" placeholder="Ex: 20" style="width: 400px;" required>
+          <button class="btn" id="btnVendaProduto" onclick="vendaProduto()">Ralizar Venda</button>
         </form>
-      </div>
-      <div class="telaCad">
-        <h2>Lista de Produtos Cadastrados</h2>
-        <div class="table-responsive">
-          <table class="table">
-            <thead class=" text-primary">
-              <th class="text-left">
-                Nome
-              </th>
-              <th>
-                Tipo
-              </th>
-              <th>
-                Quantidade
-              </th>
-              <th class="text-right">
-                Valor Unitário
-              </th>
-            </thead>
-            <tbody id="listaProdutos">
-              
-
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
 

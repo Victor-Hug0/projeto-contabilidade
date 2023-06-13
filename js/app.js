@@ -21,7 +21,7 @@ function changePageOnMobile(){
   });
 
   sellButton.addEventListener('click', function() {
-    window.location.href = "index.html";
+    window.location.href = "vendas.html";
     menuMobile.className = "menu-mobile";
   });
 

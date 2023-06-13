@@ -1,60 +1,60 @@
-class Produto{
-    constructor(nomeProduto, tipoProduto, valorProduto, quantidadadeProduto, descricaoP){
-        this.nomeProduto = nomeProduto,
-        this.tipoProduto = tipoProduto,
-        this.valorProduto = valorProduto,
-        this.quantidadadeProduto = quantidadadeProduto,
-        this.descricaoP = descricaoP
+class Produto {
+    constructor(nomeProduto, tipoProduto, valorProdutoUnidade, valorTotalProduto, quantidadadeProduto, descricaoP) {
+        this.nomeProduto = nomeProduto;
+        this.tipoProduto = tipoProduto;
+        this.valorProdutoUnidade = valorProdutoUnidade;
+        this.valorTotalProduto = valorTotalProduto;
+        this.quantidadadeProduto = quantidadadeProduto;
+        this.descricaoP = descricaoP;
     }
 
-    validarDados(){
-        for (let i in this){
-            if (this[i] == undefined || this[i] == "" || this[i] == null){
+    validarDados() {
+        for (let i in this) {
+            if (this[i] === undefined || this[i] === "" || this[i] === null) {
                 return false;
             }
-            return true;
         }
+        return true;
     }
 }
 
-class Bd{
-
-    constructor(){
+class Bd {
+    constructor() {
         let id = localStorage.getItem("id");
 
-        if(id === null){
+        if (id === null) {
             localStorage.setItem("id", 0);
         }
     }
 
-    getProximoId(){
+    getProximoId() {
         let proximoId = localStorage.getItem("id");
-        return parseInt(proximoId)+1;
+        return parseInt(proximoId) + 1;
     }
 
-    addProdutoLocalStorage(p){
+    addProdutoLocalStorage(p) {
         let id = this.getProximoId();
-        localStorage.setItem(id, JSON.stringify(p))
+        localStorage.setItem(id, JSON.stringify(p));
         localStorage.setItem("id", id);
     }
 
-    recuperarTodosRegistros(){
-        let produtosCadastrados = Array();
+    recuperarTodosRegistros() {
+        let produtosCadastrados = [];
         let id = localStorage.getItem("id");
-        for(let i = 1; i <= id; i++){
+        for (let i = 1; i <= id; i++) {
             let produto = JSON.parse(localStorage.getItem(i));
-            if (produto !== null){
+            if (produto !== null) {
                 produtosCadastrados.push(produto);
             }
         }
         return produtosCadastrados;
     }
 
-    recuperaQuantidadedeProdutos(){
+    recuperaQuantidadedeProdutos() {
         let quantidadadeProdutosTotal = 0;
         let id = localStorage.getItem("id");
-        for(let i = 1; i <= id; i++){
-            let produto = JSON.parse(localStorage.getItem(i))
+        for (let i = 1; i <= id; i++) {
+            let produto = JSON.parse(localStorage.getItem(i));
             quantidadadeProdutosTotal += Number(produto.quantidadadeProduto);
         }
         return quantidadadeProdutosTotal;
@@ -62,65 +62,64 @@ class Bd{
 }
 
 let bd = new Bd();
-let produtodCadastrados = Array();
+let produtodCadastrados = [];
+let produtosVendidos = [];
 
-function cadastoProduto(){
-    let form = document.querySelector(".form-cadProduto")
+function cadastoProduto() {
+    let form = document.querySelector(".form-cadProduto");
     let btnCadastroProduto = document.getElementById("btnCadastroProduto");
     var modalError = document.getElementById("modalError");
     var modalSucess = document.getElementById("modalSucess");
     var spanE = document.getElementsByClassName("closeE")[0];
     var spanS = document.getElementsByClassName("closeS")[0];
-    
 
-    btnCadastroProduto.addEventListener("click", function(e){
+    btnCadastroProduto.addEventListener("click", function (e) {
         e.preventDefault();
         let nomeProduto = document.getElementById("nomeP").value;
         let tipoProduto = document.getElementById("tipoP").value;
         let quantidadadeProduto = document.getElementById("qntdP").value;
-        let valorProduto = document.getElementById("valorP").value;
-        let descriçãoP = document.getElementById("descricaoP").value;
-        let valorTotalProduto = 0;
-        
-        let produto = new Produto(nomeProduto, tipoProduto, valorProduto,quantidadadeProduto, descriçãoP);
-        if (produto.validarDados()){
+        let valorProdutoUnidade = document.getElementById("valorP").value;
+        let descricaoP = document.getElementById("descricaoP").value;
+        let valorTotalProduto = Number(valorProdutoUnidade) * Number(quantidadadeProduto);
+
+        let produto = new Produto(nomeProduto, tipoProduto, valorProdutoUnidade, valorTotalProduto, quantidadadeProduto, descricaoP);
+        if (produto.validarDados()) {
             bd.addProdutoLocalStorage(produto);
             modalSucess.style.display = "block";
-            spanS.onclick = function() {
+            spanS.onclick = function () {
                 modalSucess.style.display = "none";
-            }
+            };
 
-            window.onclick = function(event) {
+            window.onclick = function (event) {
                 if (event.target == modalSucess) {
                     modalSucess.style.display = "none";
-                } 
-            }
+                }
+            };
 
-            valorTotalProduto += Number(valorProduto) * Number(quantidadadeProduto);
             form.reset();
-            mostrarInfosProdutos();
+            carregaListaProdutos();
         } else {
             modalError.style.display = "block";
-            spanE.onclick = function() {
+            spanE.onclick = function () {
                 modalError.style.display = "none";
-            }
+            };
 
-            window.onclick = function(event) {
+            window.onclick = function (event) {
                 if (event.target == modalError) {
-                  modalError.style.display = "none";
+                    modalError.style.display = "none";
                 }
-            } 
+            };
         }
 
-        carregaListaProdutos();
-    })
+
+    });
 }
 
-function carregaListaProdutos(){
+function carregaListaProdutos() {
     produtodCadastrados = bd.recuperarTodosRegistros();
-    var listaProdutos = document.getElementById("listaProdutos")
+    var listaProdutos = document.getElementById("listaProdutos");
     listaProdutos.innerHTML = "";
-    produtodCadastrados.forEach(function(p){
+    produtodCadastrados.forEach(function (p) {
         let linha = listaProdutos.insertRow();
         let celulaEsquerda = linha.insertCell(0);
         let celulaCentro = linha.insertCell(1);
@@ -129,21 +128,56 @@ function carregaListaProdutos(){
         celulaEsquerda.innerHTML = p.nomeProduto;
         celulaCentro.innerHTML = p.tipoProduto;
         celulaCentro2.innerHTML = p.quantidadadeProduto;
-        celulaDireita.innerHTML = `R$ ${p.valorProduto}`;
+        celulaDireita.innerHTML = `R$ ${p.valorProdutoUnidade}`;
         celulaEsquerda.classList.add("alinhamento-esquerda");
         celulaCentro.classList.add("alinhamento-centro");
-        celulaCentro2.classList.add("alinhamento-centro")
+        celulaCentro2.classList.add("alinhamento-centro");
         celulaDireita.classList.add("alinhamento-direita");
-    })
+    });
 }
 
-function mostrarInfosProdutos(){
+function mostrarInfosProdutos() {
     let pC = document.getElementById("produtosCadastrados");
     let qntdTotal = bd.recuperaQuantidadedeProdutos();
     pC.innerHTML = `${qntdTotal}`;
 }
 
+function getIdProduto(nomeProduto) {
+    let id = null;
+    for (let i = 1; i <= localStorage.length; i++) {
+      let produto = JSON.parse(localStorage.getItem(i));
+      if (produto && produto.nomeProduto === nomeProduto) {
+        id = i;
+        break;
+      }
+    }
+    return id;
+  }
+
+function vendaProduto() {
+    let nomePVenda = document.getElementById("nomePVenda");
+
+    const idProduto = getIdProduto(nomePVenda.value);
+    if (idProduto !== null){
+        produtosVendidos.push(localStorage.getItem(idProduto));
+        localStorage.removeItem(idProduto);
+        alert("Venda realizada com sucesso!");
+    }
+    carregaListaProdutos();
+}
+
+function calcularValorTotalVendas() {
+    let valorTotalVendas = 0;
+    produtosVendidos.forEach(function(produto) {
+      valorTotalVendas += Number(produto.valorTotalProduto);
+    });
+    return valorTotalVendas;
+}
+
+function mostraInfoLucros(){
+    let lucroInfo = document.getElementById("lucroInfo");
+    let valorLucro = calcularValorTotalVendas().toFixed(2);
+    lucroInfo.innerHTML = `R$ ${valorLucro}`;
+}
 
 cadastoProduto();
-
-

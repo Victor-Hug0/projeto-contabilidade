@@ -11,7 +11,7 @@
     <title>Gestão Empresarial</title>
     
 </head>
-<body onload="mostrarInfosProdutos()">
+<body onload="mostrarInfosProdutos(), mostraInfoLucros()">
     <aside class="sidebar">
         <header class="sidebar-header">
             <img class="logo-img" src="img/logo-small.png" alt="Logo Usuário">
@@ -32,7 +32,7 @@
                 </span>
             </a>
 
-            <a href="index.html">
+            <a href="vendas.html">
                 <span>
                     <i class="material-symbols-outlined">shopping_bag</i>
                     <span>Realizar venda</span>
@@ -105,14 +105,14 @@
                     <span class="material-symbols-outlined img-info money">payments</span>
                     <div class="number">
                         <p class="title-info">Lucro com Vendas</p>
-                        <p class="number-info">R$ 00,00</p>
+                        <p class="number-info" id="lucroInfo">R$ 0,00</p>
                     </div>
                 </div>
                 <div class="box">
                     <span class="material-symbols-outlined img-info cart">shopping_cart</span>
                     <div class="number">
                         <p class="title-info">Quantidade de Vendas</p>
-                        <p class="number-info">0</p>
+                        <p class="number-info" id="infoQntdVendas">0</p>
                     </div>
                 </div>
                 <div class="box">
