@@ -247,9 +247,9 @@ tr{
 }
 
 .container-graphic2-3 {
-    margin-left: 90px;
-    width: 1450px;
+    width: 1380px;
     height: 500px;
+    margin: 30px auto 30px auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -271,7 +271,7 @@ tr{
   
 .graphic2 {
     background-color: #fff;
-    margin: 20px;
+    margin: 0 20px 0 0;
     width: 450px;
     height: 450px;
     border-radius: 20px;
@@ -280,7 +280,7 @@ tr{
   
 .graphic3 {
     background-color: #fff;
-    margin: 20px 0 20px 20px;
+    margin: 20px 0 20px 30px;
     width: 890px;
     height: 450px;
     border-radius: 20px;
@@ -439,12 +439,13 @@ tr{
     }
 
     .graphic2{
+        margin: 0;
         height: 660px;
         width: 640px;
     }
 
     .graphic3{
-        margin-right: 20px;
+        margin: 40px 0 40px 0;
         width: 640px;
     }
 
